@@ -18,68 +18,25 @@ function Home() {
 
   const handleGenre = (event) => {
     setGenre(event.target.value);
+    setFiltre("all");
   };
 
   const handleFiltre = (event) => {
     setFiltre(event.target.value);
+    setGenre(0);
   };
-  /*
-  const fetchMoviesHandler = useCallback(async () => {
-    setIsLoading(true);
-    setError(null);
-    const url =  "https://api.themoviedb.org/3/discover/tv?api_key=92b418e837b833be308bbfb1fb2aca1e&language=en-US&sort_by=popularity.desc&page=1&timezone=America/New_York&include_null_first_air_dates=false"
-    if(genre) {
-        console.log(genre);
-        console.log("not null");
-    }
-    if(filtre) {
-        console.log(filtre);
-        console.log("filtre no null");
-    }
-    try {
-      const response = await fetch(
-        "https://api.themoviedb.org/3/discover/tv?api_key=92b418e837b833be308bbfb1fb2aca1e&language=en-US&sort_by=popularity.desc&page=1&timezone=America/New_York&include_null_first_air_dates=false"
-      );
-      if (!response.ok) {
-        throw new Error("Something went wrong!");
-      }
 
-      const data = await response.json();
-      //console.log(data);
-      const transformedMovies = data.results.map((movieData) => {
-        //console.log(movieData);
-        return {
-          id: movieData.id,
-          name: movieData.original_name,
-          overview: movieData.overview,
-          poster_path: movieData.poster_path,
-        };
-      });
-      setMovies(transformedMovies);
-    } catch (error) {
-      setError(error.message);
-    }
-    setIsLoading(false);
-  }, [filtre]);
-
-  useEffect(() => {
-    fetchMoviesHandler();
-  }, [fetchMoviesHandler]);
-  */
   useEffect(() => {
     const fetchMovieData = async () => {
       setIsLoading(true);
       setError(null);
       const url_prefix =
         "https://api.themoviedb.org/3/discover/movie?api_key=92b418e837b833be308bbfb1fb2aca1e&language=en-US&sort_by=popularity.desc&page=1";
-        //https://api.themoviedb.org/3/discover/movie?api_key=92b418e837b833be308bbfb1fb2aca1e&language=en-US&sort_by=popularity.desc&page=1&with_genres=28
       let url = url_prefix;
       if (genre!== 0) {
-        console.log(genre);
         url = url_prefix + "&with_genres=" + genre;
-        console.log(url);
       }
-      console.log(filtre);
+      
       if (filtre!=="all") {
         url = "https://api.themoviedb.org/3/movie/"+filtre+"?api_key=92b418e837b833be308bbfb1fb2aca1e&language=en-US";
       }

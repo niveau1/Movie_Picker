@@ -3,6 +3,7 @@ import Home from "./Home";
 
 function Filtre(propos){
     const [genres, setGenres] = useState([{id:0, value:'Genre?'}]);
+    
     const [filtres, setFiltres] = useState([
         {id: 0, value: 'all', name:'All'},
         {id: 1, value: 'now_playing', name:'Now Playing'},
@@ -10,7 +11,7 @@ function Filtre(propos){
         {id: 3, value: 'top_rated', name: 'Top Rated'},
         {id: 4, value: 'upcoming', name: 'Upcoming'},
     ]);
-
+    
     const fetchGenres = useMemo(async () => {
       try {
         const response = await fetch(
